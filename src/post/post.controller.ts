@@ -34,6 +34,14 @@ export class PostController {
 
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
+  @Get('/byuserid/:id')
+  @Auth()
+  async getAllById(@Param('id') id: string) {
+    return this.postService.getAllById(+id);
+  }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
   @Auth()
   @Post()
   async create(@CurrentUser('id') userId, @Body() dto: CreatePostDto) {

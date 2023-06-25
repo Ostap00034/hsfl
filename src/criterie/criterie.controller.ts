@@ -32,6 +32,12 @@ export class CriterieController {
   }
 
   @UsePipes(new ValidationPipe())
+  @Get('/category/:id')
+  async getByCategory(@Param('id') categoryId: string) {
+    return this.criterieService.getByCategory(+categoryId);
+  }
+
+  @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Post()
   async create(@Body() dto: CreateCriterieDto) {

@@ -6,14 +6,14 @@ export class UpdatePostDto {
   title: string;
 
   @IsOptional()
-  @IsNumber()
-  point: number;
+  @IsString()
+  point: string;
 
   @IsOptional()
-  @IsNumber()
-  criterieId: number;
+  @IsString()
+  criterieId: string;
 
   @IsOptional()
-  @IsNumber()
-  categoryId: number;
+  @IsString()
+  categoryId: string;
 }

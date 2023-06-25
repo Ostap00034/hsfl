@@ -4,6 +4,6 @@ export class CreateCriterieDto {
   @IsString()
   title: string;
 
-  @IsNumber()
-  categoryId: number;
+  @IsString()
+  categoryId: string;
 }

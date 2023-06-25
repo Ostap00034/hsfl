@@ -710,10 +710,10 @@
     webpack "5.82.1"
     webpack-node-externals "3.0.0"
 
-"@nestjs/common@^9.0.0":
-  version "9.4.3"
-  resolved "https://registry.npmjs.org/@nestjs/common/-/common-9.4.3.tgz"
-  integrity sha512-Gd6D4IaYj01o14Bwv81ukidn4w3bPHCblMUq+SmUmWLyosK+XQmInCS09SbDDZyL8jy86PngtBLTdhJ2bXSUig==
+"@nestjs/common@^10.0.3":
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-10.0.3.tgz#998b80884b9c9ffd54f7e51105612cf5e47a63dc"
+  integrity sha512-Zv59rDQMuwyja8fvnQelG4AbEe7FEC2ZUXcUwE6Tw0aOHx5CaOBIU426FCYY9o3iqJX3xLCKVJ8NrLPg58xCZg==
   dependencies:
     uid "2.0.2"
     iterare "1.2.1"
@@ -756,7 +756,7 @@
 
 "@nestjs/passport@^10.0.0":
   version "10.0.0"
-  resolved "https://registry.npmjs.org/@nestjs/passport/-/passport-10.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-10.0.0.tgz#92d36d4b8796b373da3f4d1a055db03cb246b127"
   integrity sha512-IlKKc6M7JOe+4dBbW6gZsXBSD05ZYgwfGf3GJhgCmUGYVqffpDdALQSS6JftnExrE+12rACoEmHkzYwKAGVK0Q==
 
 "@nestjs/platform-express@^9.0.0":

@@ -59,7 +59,7 @@ export class AuthService {
     if (oldUserByEmail)
       throw new BadRequestException('Пользователь с таким логином существует.');
 
-    const mo = await this.moService.getById(dto.moId);
+    const mo = await this.moService.getById(+dto.moId);
 
     const user = await this.prisma.user.create({
       data: {
@@ -67,7 +67,7 @@ export class AuthService {
         password: await hash(dto.password),
         fio: dto.fio,
         mo: {
-          connect: { id: dto.moId },
+          connect: { id: +dto.moId },
         },
         role: dto.role,
         point: 0,
@@ -107,7 +107,7 @@ export class AuthService {
   private async validateUser(dto: LoginDto) {
     const user = await this.prisma.user.findUnique({
       where: {
-        login: dto.login,
+        email: dto.email,
       },
     });
 

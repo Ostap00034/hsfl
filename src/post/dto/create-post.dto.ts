@@ -4,12 +4,12 @@ export class CreatePostDto {
   @IsString()
   title: string;
 
-  @IsNumber()
-  point: number;
+  @IsString()
+  point: string;
 
-  @IsNumber()
-  criterieId: number;
+  @IsString()
+  criterieId: string;
 
-  @IsNumber()
-  categoryId: number;
+  @IsString()
+  categoryId: string;
 }
