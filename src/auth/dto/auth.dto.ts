@@ -1,10 +1,4 @@
-import {
-  IsEmail,
-  MinLength,
-  IsString,
-  IsPhoneNumber,
-  IsOptional,
-} from 'class-validator';
+import { MinLength, IsString, IsOptional, IsNumber } from 'class-validator';
 
 export class AuthDto {
   @IsString()
@@ -19,4 +13,6 @@ export class AuthDto {
   })
   @IsString()
   password: string;
+  @IsNumber()
+  moId: number;
 }

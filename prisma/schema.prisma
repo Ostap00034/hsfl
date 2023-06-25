@@ -16,9 +16,15 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   login    String @unique
+  fio      String
   role     String
   password String
-  Post     Post[]
+  point    Float
+
+  mo   Mo  @relation(fields: [moId], references: [id])
+  moId Int
+
+  Post Post[]
 }
 
 model Post {
@@ -26,8 +32,10 @@ model Post {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  title  String
-  user   User   @relation(fields: [userId], references: [id])
+  title String @unique
+  point Float
+
+  user   User @relation(fields: [userId], references: [id])
   userId Int
 
   criterie   Criterie @relation(fields: [criterieId], references: [id])
@@ -42,8 +50,12 @@ model Criterie {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  title String
-  Post  Post[]
+  title String @unique
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  Post Post[]
 }
 
 model Category {
@@ -51,6 +63,17 @@ model Category {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  title String
-  Post  Post[]
+  title String @unique
+
+  Post     Post[]
+  Criterie Criterie[]
+}
+
+model Mo {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  title String @unique
+  User  User[]
 }

@@ -11,10 +11,15 @@ import { User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { LoginDto } from './dto/login.dto';
+import { MoService } from 'src/mo/mo.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService, private jwt: JwtService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwt: JwtService,
+    private moService: MoService,
+  ) {}
 
   async login(dto: LoginDto) {
     const user = await this.validateUser(dto);
@@ -45,21 +50,27 @@ export class AuthService {
   }
 
   async register(dto: AuthDto) {
-    const oldUserByEmail = await this.prisma.user.findUnique({
+    const oldUserByLogin = await this.prisma.user.findUnique({
       where: {
         login: dto.login,
       },
     });
 
-    if (oldUserByEmail)
-      throw new BadRequestException('Пользователь с такой почтой существует.');
+    if (oldUserByLogin)
+      throw new BadRequestException('Пользователь с таким логином существует.');
+
+    const mo = await this.moService.getById(dto.moId);
 
     const user = await this.prisma.user.create({
       data: {
         login: dto.login,
         password: await hash(dto.password),
         fio: dto.fio,
+        mo: {
+          connect: { id: dto.moId },
+        },
         role: dto.role,
+        point: 0,
       },
     });
 
