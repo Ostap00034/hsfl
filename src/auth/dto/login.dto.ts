@@ -1,8 +1,9 @@
-import { MinLength, IsString } from 'class-validator';
+import { MinLength, IsString, IsEmail } from 'class-validator';
 
 export class LoginDto {
   @IsString()
-  login: string;
+  @IsEmail()
+  email: string;
 
   @MinLength(6, {
     message: 'Пароль должен быть не менее 6 символов.',

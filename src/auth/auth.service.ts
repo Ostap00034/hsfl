@@ -50,20 +50,20 @@ export class AuthService {
   }
 
   async register(dto: AuthDto) {
-    const oldUserByLogin = await this.prisma.user.findUnique({
+    const oldUserByEmail = await this.prisma.user.findUnique({
       where: {
-        login: dto.login,
+        email: dto.email,
       },
     });
 
-    if (oldUserByLogin)
+    if (oldUserByEmail)
       throw new BadRequestException('Пользователь с таким логином существует.');
 
     const mo = await this.moService.getById(dto.moId);
 
     const user = await this.prisma.user.create({
       data: {
-        login: dto.login,
+        email: dto.email,
         password: await hash(dto.password),
         fio: dto.fio,
         mo: {
@@ -99,7 +99,7 @@ export class AuthService {
   private returnUserFields(user: User) {
     return {
       id: user.id,
-      email: user.login,
+      email: user.email,
       role: user.role,
     };
   }

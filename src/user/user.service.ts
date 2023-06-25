@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { hash } from 'argon2';
-import { Prisma } from '@prisma/client';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ReturnUserProfile } from './return-profile.object';
 @Injectable()
@@ -29,9 +28,9 @@ export class UserService {
     return user;
   }
 
-  async update(id: number, login: string, dto: UpdateUserDto) {
+  async update(id: number, email: string, dto: UpdateUserDto) {
     const isSameUser = await this.prisma.user.findUnique({
-      where: { login: login },
+      where: { email: email },
     });
 
     if (isSameUser && id !== isSameUser.id) {
@@ -45,7 +44,7 @@ export class UserService {
         id,
       },
       data: {
-        login: dto.login,
+        email: dto.email,
         fio: dto.fio,
         password: dto.password ? await hash(dto.password) : user.password,
       },

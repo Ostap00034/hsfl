@@ -34,9 +34,9 @@ export class UserController {
   @Put('profile')
   async updateProfile(
     @CurrentUser('id') id: number,
-    @CurrentUser('login') login: string,
+    @CurrentUser('email') email: string,
     @Body() dto: UpdateUserDto,
   ) {
-    return this.userService.update(id, login, dto);
+    return this.userService.update(id, email, dto);
   }
 }
